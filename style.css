@@ -1,8 +1,11 @@
-body{font-family: "Arial"}
-a{text-decoration: none;}
+body{font-family: "Arial"; text-align:center;}
+a{text-decoration: none;color:#0096ff;}
+a:hover{text-decoration:none;}
 
 .product-container{width:300px; border:1px solid #aaa; margin:10px; display:inline-block;}
 .product-container img{width:100%; height:auto;}
 
-.title{font-size:20px;}
+.page_title{font-size:36px;}
+.page_tagline{font-size:18px;}
 .description{padding:10px;}
+.desc_title, .desc_tagline{font-size:16px;}
