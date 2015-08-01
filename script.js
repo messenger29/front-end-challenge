@@ -3,11 +3,11 @@ function domobj(){
   var self        =this;
   self.products   = [];
 
+  //given url, get json data, parse each sales object into productobj and push into products variable
   self.getproducts = function(url){
     $.getJSON(url, function(response){
         for(i=0; i<response.sales.length ; i++){
           self.products.push( new productobj(response.sales[i], i)  );
-          console.log('gettingproduct');
         }
     });
   }
@@ -17,24 +17,13 @@ function domobj(){
     for( i=0; i< self.products.length ; i++){
       self.products[i].updatehtml();
     }
-    console.log('updateproducthtml');
   }
   
   self.updatedom = function(){
     var i=0
     thishtml='';
     for( i=0; i< self.products.length ; i++){
-      if (i % 3 == 0 ){
-        //create new row of 3 items  
-        thishtml += "<div class='row'>"; 
-        console.log("START") 
-      }
       thishtml += self.products[i].htmlview;
-      if ((i % 3 == 2) || i == (self.products.length-1) ){
-        //close off row when 3 items or last item is reached
-        thishtml += "</div>";
-        console.log("FINISH")
-      }
     }
     $("#content").append(thishtml)  //print to html
   }
@@ -50,7 +39,7 @@ function productobj(product, i){
   self.url          = product.url
   self.htmlview     = ""
   self.index        = i
-  self.custom_class = "col"+ ((i % 3) +1)
+  self.custom_class = "col-md-4"
   
   //create and fill in html snippet for this
   self.updatehtml= function(){
@@ -63,5 +52,5 @@ function productobj(product, i){
 
 var page=new domobj();
 page.getproducts('data.json');
-setTimeout("console.log('building html');page.updateproducthtml();",100);
-setTimeout("page.updatedom()",200)
+setTimeout("console.log('building html');page.updateproducthtml();",100); //changed timeout value from 20 to 100 b/c getproducts taking longer
+setTimeout("page.updatedom()",200)  //changed timeout value from 50 to 200 to go last
