@@ -7,29 +7,41 @@ function domobj(){
     $.getJSON(url, function(response){
         for(i=0; i<response.sales.length ; i++){
           self.products.push( new productobj(response.sales[i], i)  );
+          console.log('gettingproduct');
         }
     });
   }
     
+  //goes through each product and call updatehtml to create html snippet for it
   self.updateproducthtml = function(){
     for( i=0; i< self.products.length ; i++){
       self.products[i].updatehtml();
     }
+    console.log('updateproducthtml');
   }
   
   self.updatedom = function(){
     var i=0
     thishtml='';
     for( i=0; i< self.products.length ; i++){
-      if (i % 3 == 0 ){  thishtml += "<div class='row'>"; console.log("START") }
+      if (i % 3 == 0 ){
+        //create new row of 3 items  
+        thishtml += "<div class='row'>"; 
+        console.log("START") 
+      }
       thishtml += self.products[i].htmlview;
-      if ((i % 3 == 2) || i == (self.products.length-1) ){thishtml += "</div>";console.log("FINISH")}
+      if ((i % 3 == 2) || i == (self.products.length-1) ){
+        //close off row when 3 items or last item is reached
+        thishtml += "</div>";
+        console.log("FINISH")
+      }
     }
-    $("#content").append(thishtml)
+    $("#content").append(thishtml)  //print to html
   }
   
 }
 
+//parse product object
 function productobj(product, i){
   var self          = this;
   self.photo        = product.photos.medium_half
@@ -40,6 +52,7 @@ function productobj(product, i){
   self.index        = i
   self.custom_class = "col"+ ((i % 3) +1)
   
+  //create and fill in html snippet for this
   self.updatehtml= function(){
     $.get('product-template.html', function(template){
       self.htmlview = template.replace('{image}', self.photo).replace('{title}', self.title).replace('{tagline}', self.tagline).replace('{url}', self.url).replace('{custom_class}', self.custom_class);
