@@ -25,6 +25,7 @@ function domobj(){
     for( i=0; i< self.products.length ; i++){
       thishtml += self.products[i].htmlview;
     }
+    $("#loading").remove();
     $("#content").append(thishtml)  //print to html
   }
   
