@@ -8,4 +8,5 @@ a:hover{text-decoration:none;}
 .page_title{font-size:36px;}
 .page_tagline{font-size:18px;}
 .description{padding:10px;}
-.desc_title, .desc_tagline{font-size:16px;}
+
+.desc_title, .desc_tagline{padding-top:30px;font-size:16px;}
