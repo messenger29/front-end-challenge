@@ -7,7 +7,7 @@ function salesModel(){
     var products = [];
     $.getJSON(url, function(response){
         for(i=0; i<response.sales.length ; i++){
-          products.push( new productobj(response.sales[i], i)  );
+          products.push(response.sales[i]);
         }
     }).done(function(){
       if(typeof callback === 'function'){
@@ -22,15 +22,18 @@ function salesModel(){
 
 //all DOM manipulations
 function domUpdate(){
-  var self      =this;
+  var self       =this;
+  self.products  =[];
 
-  //combined updateproducthtml and updatehtml
-  self.updateproducthtml = function(products){
-    products[0].getTemplate(function(template){
+  self.updateproducthtml = function(productsRaw){
+    for(var i = 0; i < productsRaw.length; i++){
+      self.products.push(new productobj(productsRaw[i], i)  )
+    }
+    self.products[0].getTemplate(function(template){
       $('#loading').toggleClass('hidden');
       thishtml='';
-      for( i=0; i< products.length ; i++){
-        $('#content').append(products[i].updatehtml(template));
+      for( i=0; i< self.products.length ; i++){
+        $('#content').append(self.products[i].updatehtml(template));
       }
       $('#loading').toggleClass('hidden');
     });
