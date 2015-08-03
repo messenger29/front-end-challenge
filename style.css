@@ -8,8 +8,25 @@ a:hover{text-decoration:none;}
 	margin:10px; 
 	display:inline-block;
 	position:relative;
+	z-index:1;
 }
 .product-container img{width:100%; height:auto;}
+.product-remove{
+	position:absolute;
+	top:5px;
+	right:5px;
+	z-index: 15;
+}
+.product-remove span{
+	display:block;
+	color:white;
+	cursor:pointer;
+	background: rgba(0, 0, 0, .8);
+	padding:0px 5px;
+	border-radius:15px;
+	font-size:10px;
+
+}
 
 .page_title{font-size:36px;}
 .page_tagline{font-size:18px;}
@@ -29,6 +46,7 @@ a:hover{text-decoration:none;}
     color: #FFF;
     background: rgba(0, 0, 0, .6);
     transition: all 0.5s;
+    z-index:5;
 }
 
 .product-container:hover .desc_body{

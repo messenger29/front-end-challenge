@@ -50,6 +50,14 @@ function productobj(product, i){
   }
 }
 
+//remove product item
+$(document).on('click','.product-remove',function(){
+  //fadeout transition for product
+  $(this).parent().parent().fadeOut(300, function() {
+    //completely remove product from DOM
+    $(this).remove();
+  });
+});
 
 var page=new domobj();
 page.getproducts('data.json');
